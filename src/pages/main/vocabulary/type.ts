@@ -3,5 +3,6 @@ export interface Vocabulary {
   value: string;
   type: string;
   level: string;
+  countable: string;
   description: string;
 }
