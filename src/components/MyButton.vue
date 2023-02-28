@@ -4,6 +4,7 @@
     :text-color="props.textColor"
     :label="props.label"
     :icon="props.icon"
+    type="submit"
     @click="action"
   />
 </template>
