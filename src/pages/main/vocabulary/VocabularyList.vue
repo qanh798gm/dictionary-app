@@ -1,7 +1,13 @@
-<template><table-list :headers="headers" :items="data"></table-list></template>
+<template>
+  <div class="q-pa-md flex justify-end">
+    <my-button label="Add" icon="add"></my-button>
+  </div>
+  <my-table-list :headers="headers" :items="data"></my-table-list>
+</template>
 
 <script setup>
-import TableList from 'src/components/table/TableList.vue';
+import MyButton from 'src/components/MyButton.vue';
+import MyTableList from 'src/components/table/MyTableList.vue';
 import { sampleVocabularyList, vocabularyHeaders } from './data';
 
 const data = sampleVocabularyList;

@@ -2,9 +2,9 @@
   <q-layout>
     <q-header elevated>
       <q-toolbar>
-        <q-toolbar-title> Quasar App </q-toolbar-title>
+        <q-toolbar-title> {{ appName }} </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <div>Version {{ appVersion }}</div>
       </q-toolbar>
     </q-header>
 
@@ -14,4 +14,7 @@
   </q-layout>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const appName = import.meta.env.VITE_APP_NAME;
+const appVersion = import.meta.env.VITE_VERSION;
+</script>
