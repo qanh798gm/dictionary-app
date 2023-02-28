@@ -24,6 +24,21 @@ export const vocabularyHeaders = [
   },
 ];
 
+export const typeOptions = [
+  'noun',
+  'pronoun',
+  'verb',
+  'adjejctive',
+  'adverb',
+  'preposition',
+  'conjunction',
+  'interjection',
+];
+
+export const levelOptions = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
+
+export const countableOptions = ['countable', 'uncountable'];
+
 export const sampleVocabularyList: Vocabulary[] = [
   {
     id: '0',
