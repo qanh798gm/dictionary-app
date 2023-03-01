@@ -94,10 +94,13 @@ import MyButton from 'src/components/MyButton.vue';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { typeOptions, levelOptions, countableOptions } from './data';
+import { useVocabularyStore } from 'src/stores/vocabulary';
+import { Vocabulary } from './type';
 
 const required = (val: any) => !!val || 'Field is required';
 
 const router = useRouter();
+const vocabularyStore = useVocabularyStore();
 
 const title = ref('Add Vocabulary');
 const form = ref({
@@ -113,7 +116,14 @@ const valueCallback = (value: any, field: string) => {
 };
 
 const onSubmit = () => {
-  console.log(form.value);
+  const newVocabulary: Vocabulary = {
+    ...form.value,
+    countable: form.value.countable.join(', '),
+  };
+
+  vocabularyStore.addVocabulary(() => {
+    router.push('/vocabulary-list');
+  }, newVocabulary);
 };
 </script>
 

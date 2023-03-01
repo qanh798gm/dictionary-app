@@ -1,5 +1,5 @@
 export interface Vocabulary {
-  id: string;
+  id?: string;
   value: string;
   type: string;
   level: string;
