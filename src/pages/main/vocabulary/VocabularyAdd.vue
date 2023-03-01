@@ -15,61 +15,58 @@
                 <h4 class="text-h5 text-white q-my-md">{{ title }}</h4>
               </q-card-section>
               <q-card-section>
-                <q-form class="q-px-sm q-pt-xl">
-                  <q-input
-                    :ref="form.value"
-                    square
+                <q-form class="q-px-sm">
+                  <my-input-control
                     clearable
-                    v-model="form.value"
-                    lazy-rules
+                    field="value"
                     label="Word"
-                    :rules="[(val) => !!val || 'Value is required']"
-                  >
-                  </q-input>
-                  <q-select
-                    :options="typeOptions"
-                    :ref="form.type"
-                    square
+                    :modelValue="form.value"
+                    @value-callback="valueCallback"
+                    :rules="[required]"
+                  ></my-input-control>
+
+                  <my-select-control
                     clearable
-                    v-model="form.type"
-                    lazy-rules
+                    field="type"
                     label="Type"
-                    :rules="[(val) => !!val || 'Type is required']"
+                    :modelValue="form.value"
+                    :options="typeOptions"
+                    :rules="[required]"
+                    @value-callback="valueCallback"
                   >
-                  </q-select>
-                  <q-select
-                    :options="levelOptions"
-                    :ref="form.level"
-                    square
+                  </my-select-control>
+
+                  <my-select-control
                     clearable
-                    v-model="form.level"
-                    lazy-rules
+                    field="level"
                     label="Level"
-                    :rules="[(val) => !!val || 'Level is required']"
+                    :modelValue="form.value"
+                    :options="levelOptions"
+                    :rules="[required]"
+                    @value-callback="valueCallback"
                   >
-                  </q-select>
-                  <q-input
-                    :ref="form.description"
-                    square
+                  </my-select-control>
+
+                  <my-input-area-control
                     clearable
-                    type="textarea"
-                    v-model="form.description"
-                    lazy-rules
+                    field="description"
                     label="Description"
-                    :rules="[(val) => !!val || 'Description is required']"
-                  >
-                  </q-input>
-                  <q-select
-                    :options="countableOptions"
-                    :ref="form.countable"
-                    multiple
-                    square
+                    :modelValue="form.value"
+                    @value-callback="valueCallback"
+                    :rules="[required]"
+                  ></my-input-area-control>
+
+                  <my-select-control
                     clearable
-                    v-model="form.countable"
-                    lazy-rules
+                    multiple
+                    field="countable"
                     label="Countable"
+                    :modelValue="form.value"
+                    :options="countableOptions"
+                    :rules="[required]"
+                    @value-callback="valueCallback"
                   >
-                  </q-select>
+                  </my-select-control>
                 </q-form>
               </q-card-section>
 
@@ -90,15 +87,19 @@
 </template>
 
 <script setup lang="ts">
+import MyInputControl from 'src/components/form/MyInputControl.vue';
+import MyInputAreaControl from 'src/components/form/MyInputAreaControl.vue';
+import MySelectControl from 'src/components/form/MySelectControl.vue';
 import MyButton from 'src/components/MyButton.vue';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { typeOptions, levelOptions, countableOptions } from './data';
 
+const required = (val: any) => !!val || 'Field is required';
+
 const router = useRouter();
 
 const title = ref('Add Vocabulary');
-const username = ref('');
 const form = ref({
   value: '',
   type: '',
@@ -106,6 +107,10 @@ const form = ref({
   countable: [],
   description: '',
 });
+
+const valueCallback = (value: any, field: string) => {
+  form.value = { ...form.value, [field]: value };
+};
 
 const onSubmit = () => {
   console.log(form.value);
