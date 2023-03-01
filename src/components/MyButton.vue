@@ -6,7 +6,9 @@
     :icon="props.icon"
     type="submit"
     @click="action"
-  />
+  >
+    <slot></slot>
+  </q-btn>
 </template>
 
 <script setup lang="ts">

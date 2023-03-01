@@ -1,6 +1,14 @@
 <template>
   <div class="q-pa-md flex justify-end">
-    <my-button label="Add" icon="add" :action="handleAdd"></my-button>
+    <my-button
+      color="primary"
+      label=""
+      icon="add"
+      text-color="white"
+      :action="handleAdd"
+    >
+      <q-tooltip>Add vocabulary</q-tooltip>
+    </my-button>
   </div>
   <my-table-list
     :headers="headers"

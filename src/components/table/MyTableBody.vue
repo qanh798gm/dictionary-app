@@ -9,10 +9,16 @@
         <td v-else class="td-text-middle">{{ item[header.field] }}</td>
       </template>
       <td>
-        <my-button label="Edit" @click="onEditClick(item.id)"></my-button>
+        <my-button label="" icon="edit" @click="onEditClick(item.id)">
+          <q-tooltip>Edit vocabulary</q-tooltip>
+        </my-button>
       </td>
       <td>
-        <my-button label="Remove" @click="onRemoveClick(item.id)"></my-button>
+        <my-button
+          label=""
+          icon="edit"
+          @click="onRemoveClick(item.id)"
+        ></my-button>
       </td>
     </tr>
   </tbody>

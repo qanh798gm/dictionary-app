@@ -3,7 +3,7 @@
     <q-page-container>
       <q-page
         class="window-height window-width row justify-center items-center"
-        style="background: linear-gradient(#b46e13, #cca5c7)"
+        style="background: linear-gradient(#f7eee1, #f2e1f0)"
       >
         <div class="column q-pa-lg">
           <div class="row">
@@ -56,7 +56,7 @@
 
               <q-card-actions class="q-px-lg">
                 <my-button
-                  color="secondary"
+                  color="primary"
                   text-color="white"
                   label="login"
                   @click="onSubmit"
@@ -105,6 +105,6 @@ const onSubmit = () => {
 }
 
 .card-color {
-  background-color: $secondary;
+  background-color: $primary;
 }
 </style>

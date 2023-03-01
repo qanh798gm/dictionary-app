@@ -1,14 +1,17 @@
 <template>
-  <q-layout>
+  <q-layout style="background: linear-gradient(#f7eee1, #f2e1f0)">
     <q-header elevated>
       <q-toolbar>
         <q-toolbar-title> {{ appName }} </q-toolbar-title>
-
         <my-button
-          label="Logout"
-          text-color="white"
+          color="white"
+          label=""
+          icon="logout"
+          text-color="primary"
           :action="handleLogout"
-        ></my-button>
+        >
+          <q-tooltip>Logout</q-tooltip>
+        </my-button>
       </q-toolbar>
     </q-header>
 
