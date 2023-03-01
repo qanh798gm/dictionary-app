@@ -55,18 +55,6 @@
                     @value-callback="valueCallback"
                     :rules="[required]"
                   ></my-input-area-control>
-
-                  <my-select-control
-                    clearable
-                    multiple
-                    field="countable"
-                    label="Countable"
-                    :modelValue="form.value"
-                    :options="countableOptions"
-                    :rules="[required]"
-                    @value-callback="valueCallback"
-                  >
-                  </my-select-control>
                 </q-form>
               </q-card-section>
 
@@ -93,7 +81,7 @@ import MySelectControl from 'src/components/form/MySelectControl.vue';
 import MyButton from 'src/components/MyButton.vue';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { typeOptions, levelOptions, countableOptions } from './data';
+import { typeOptions, levelOptions } from './data';
 import { useVocabularyStore } from 'src/stores/vocabulary';
 import { Vocabulary } from './type';
 
@@ -107,7 +95,6 @@ const form = ref({
   value: '',
   type: '',
   level: '',
-  countable: [],
   description: '',
 });
 
@@ -118,10 +105,9 @@ const valueCallback = (value: any, field: string) => {
 const onSubmit = () => {
   const newVocabulary: Vocabulary = {
     ...form.value,
-    countable: form.value.countable.join(', '),
   };
 
-  vocabularyStore.addVocabulary(() => {
+  vocabularyStore.mutateVocabulary(() => {
     router.push('/vocabulary-list');
   }, newVocabulary);
 };

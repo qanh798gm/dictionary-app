@@ -16,7 +16,7 @@ const routes: RouteRecordRaw[] = [
         meta: { requiresAuth: true },
       },
       {
-        path: 'vocabulary-edit',
+        path: 'vocabulary-edit/:id',
         component: () => import('src/pages/main/vocabulary/VocabularyEdit.vue'),
         meta: { requiresAuth: true },
       },

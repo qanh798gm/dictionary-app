@@ -9,7 +9,7 @@
         <td v-else class="td-text-middle">{{ item[header.field] }}</td>
       </template>
       <td>
-        <my-button label="Edit"></my-button>
+        <my-button label="Edit" @click="onItemClick(item.id)"></my-button>
       </td>
     </tr>
   </tbody>
@@ -18,10 +18,15 @@
 <script setup lang="ts">
 import MyButton from '../MyButton.vue';
 
+const emit = defineEmits(['itemCallback']);
 const props = defineProps<{
   headers: any[];
   items: any[];
 }>();
 
 const { headers = [], items = [] } = props;
+
+const onItemClick = (id: string) => {
+  emit('itemCallback', id);
+};
 </script>
