@@ -42,5 +42,13 @@ export const useVocabularyStore = defineStore('vocabulary', {
       }
       callback();
     },
+    removeVocabulary(id: string) {
+      const index = this.vocabularyList.findIndex(
+        (vocabulary) => vocabulary.id === id
+      );
+      const updatedVocabularyList = [...this.vocabularyList];
+      updatedVocabularyList.splice(index, 1);
+      this.vocabularyList = updatedVocabularyList;
+    },
   },
 });

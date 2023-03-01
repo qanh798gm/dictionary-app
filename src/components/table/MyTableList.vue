@@ -5,7 +5,8 @@
       <my-table-body
         :headers="headers"
         :items="items"
-        @item-callback="itemCallback"
+        @edit-callback="editCallback"
+        @remove-callback="onRemoveClick"
       ></my-table-body>
     </q-markup-table>
   </div>
@@ -14,17 +15,25 @@
 <script setup lang="ts">
 import MyTableHeader from './MyTableHeader.vue';
 import MyTableBody from './MyTableBody.vue';
+import { ref, watch } from 'vue';
 
-const emit = defineEmits(['itemCallback']);
+const emit = defineEmits(['editCallback', 'removeCallback']);
 const props = defineProps<{
   headers: any[];
   items: any[];
 }>();
 
-const { headers = [], items = [] } = props;
+const { headers = [] } = props;
+const items = ref(props.items);
+watch(props, () => {
+  items.value = props.items;
+});
 
-const itemCallback = (id: string) => {
-  emit('itemCallback', id);
+const editCallback = (id: string) => {
+  emit('editCallback', id);
+};
+const onRemoveClick = (id: string) => {
+  emit('removeCallback', id);
 };
 </script>
 
