@@ -10,17 +10,19 @@
       <q-tooltip>Add vocabulary</q-tooltip>
     </my-button>
   </div>
-  <my-table-list
+  <my-smart-table
     :headers="headers"
     :items="mutatedItems"
+    :title="'Vocabulary'"
     @edit-callback="editCallback"
     @remove-callback="removeCallback"
-  ></my-table-list>
+  ></my-smart-table>
 </template>
 
 <script setup lang="ts">
 import MyButton from 'src/components/MyButton.vue';
-import MyTableList from 'src/components/table/MyTableList.vue';
+// import MyTableList from 'src/components/table/MyTableList.vue';
+import MySmartTable from 'src/components/table/MySmartTable.vue';
 import { useRouter } from 'vue-router';
 import { vocabularyHeaders } from './data';
 import { useVocabularyStore } from 'src/stores/vocabulary';

@@ -1,9 +1,17 @@
 <template>
   <q-layout view="lHh Lpr fff">
     <q-page-container>
-      <q-page
-        class="window-height window-width row justify-center items-center"
-      >
+      <q-page class="window-height window-width row justify-center">
+        <div class="column q-pa-lg">
+          <my-button
+            color="primary"
+            text-color="white"
+            label=""
+            icon="arrow_back"
+            @click="onSubmit"
+          >
+          </my-button>
+        </div>
         <div class="column q-pa-lg">
           <div class="row">
             <q-card
@@ -69,6 +77,7 @@
             </q-card>
           </div>
         </div>
+        <div class="column q-pa-lg"></div>
       </q-page>
     </q-page-container>
   </q-layout>
@@ -113,13 +122,17 @@ const valueCallback = (value: any, field: string) => {
   form.value = { ...form.value, [field]: value };
 };
 
+const goBack = () => {
+  router.push('/vocabulary-list');
+};
+
 const onSubmit = () => {
   const newVocabulary: Vocabulary = {
     ...form.value,
   };
 
   editVocabulary(() => {
-    router.push('/vocabulary-list');
+    goBack();
   }, newVocabulary);
 };
 </script>

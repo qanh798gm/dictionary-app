@@ -2,21 +2,34 @@ import { Vocabulary } from './type';
 
 export const vocabularyHeaders = [
   {
+    name: 'value',
     field: 'value',
     label: 'Word',
-    isPrimary: true,
+    align: 'left',
+    sortable: true,
+    headerStyle: 'font-weight: bold',
+    style: 'font-weight: bold',
   },
   {
+    name: 'type',
     field: 'type',
     label: 'Type',
+    align: 'left',
+    sortable: true,
   },
   {
+    name: 'level',
     field: 'level',
     label: 'Level',
+    align: 'left',
+    sortable: true,
   },
   {
+    name: 'description',
     field: 'description',
     label: 'Description',
+    align: 'left',
+    sortable: true,
   },
 ];
 

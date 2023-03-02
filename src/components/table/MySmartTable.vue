@@ -1,0 +1,90 @@
+<template>
+  <div class="q-pa-md">
+    <q-table
+      row-key="name"
+      :columns="headers"
+      :filter="filter"
+      :rows="items"
+      :title="title"
+    >
+      <template v-slot:top-right>
+        <q-input
+          borderless
+          dense
+          debounce="300"
+          v-model="filter"
+          placeholder="Search"
+        >
+          <template v-slot:append>
+            <q-icon name="search" />
+          </template>
+        </q-input>
+      </template>
+      <template v-slot:body="props">
+        <q-tr :props="props">
+          <template v-for="header in headers" :key="header.name">
+            <q-td :props="props">
+              {{ props.row[header.name] }}
+            </q-td>
+          </template>
+          <q-td>
+            <span class="q-mr-sm">
+              <my-button
+                label=""
+                icon="edit"
+                @click="onEditClick(props.row.id)"
+              >
+                <q-tooltip>Edit "{{ props.row.value }}"</q-tooltip>
+              </my-button>
+            </span>
+            <my-button label="" icon="delete" @click="alert(props.row.id)">
+              <q-tooltip>Edit "{{ props.row.value }}"</q-tooltip>
+            </my-button>
+          </q-td>
+        </q-tr>
+      </template>
+    </q-table>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { useQuasar } from 'quasar';
+import { ref } from 'vue';
+import MyButton from '../MyButton.vue';
+
+const emit = defineEmits(['editCallback', 'removeCallback']);
+const props = defineProps<{
+  headers: any[];
+  items: any[];
+  title: string;
+}>();
+
+const { headers = [], items = [], title = '' } = props;
+const filter = ref('');
+
+const $q = useQuasar();
+const alert = (id: string) => {
+  $q.dialog({
+    title: 'Confirm',
+    message: 'Are you sure?',
+    cancel: true,
+    persistent: true,
+  })
+    .onOk(() => {
+      onRemoveClick(id);
+    })
+    .onCancel(() => {
+      // console.log('Cancel')
+    })
+    .onDismiss(() => {
+      // console.log('I am triggered on both OK and Cancel')
+    });
+};
+
+const onEditClick = (id: string) => {
+  emit('editCallback', id);
+};
+const onRemoveClick = (id: string) => {
+  emit('removeCallback', id);
+};
+</script>
