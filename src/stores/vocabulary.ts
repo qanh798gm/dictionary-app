@@ -19,27 +19,27 @@ export const useVocabularyStore = defineStore('vocabulary', {
   },
 
   actions: {
-    mutateVocabulary(callback: any, newVocabulary: Vocabulary) {
-      if (newVocabulary?.id) {
-        const index = this.vocabularyList.findIndex(
-          (vocabulary) => vocabulary.id === newVocabulary.id
-        );
-        const updatedVocabularyList = [...this.vocabularyList];
-        updatedVocabularyList.splice(index, 1, newVocabulary);
-        this.vocabularyList = updatedVocabularyList;
-      } else {
-        const id =
-          Math.max(
-            ...this.vocabularyList?.map(
-              (vocabulary: Vocabulary) => +vocabulary.id + 1
-            )
-          )?.toString() || '0';
-        const vocabulary: Vocabulary = {
-          ...newVocabulary,
-          id,
-        };
-        this.vocabularyList.push(vocabulary);
-      }
+    addVocabulary(callback: any, newVocabulary: Vocabulary) {
+      const id =
+        Math.max(
+          ...this.vocabularyList?.map(
+            (vocabulary: Vocabulary) => +vocabulary.id + 1
+          )
+        )?.toString() || '0';
+      const vocabulary: Vocabulary = {
+        ...newVocabulary,
+        id,
+      };
+      this.vocabularyList.push(vocabulary);
+      callback();
+    },
+    editVocabulary(callback: any, newVocabulary: Vocabulary) {
+      const index = this.vocabularyList.findIndex(
+        (vocabulary) => vocabulary.id === newVocabulary.id
+      );
+      const updatedVocabularyList = [...this.vocabularyList];
+      updatedVocabularyList.splice(index, 1, newVocabulary);
+      this.vocabularyList = updatedVocabularyList;
       callback();
     },
     removeVocabulary(id: string) {

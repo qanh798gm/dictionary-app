@@ -89,7 +89,7 @@ const required = (val: any) => !!val || 'Field is required';
 
 const router = useRouter();
 const vocabularyStore = useVocabularyStore();
-const { mutateVocabulary } = vocabularyStore;
+const { editVocabulary } = vocabularyStore;
 const vocabularyId = router?.currentRoute?.value?.params?.id as string;
 
 if (!vocabularyId) {
@@ -118,7 +118,7 @@ const onSubmit = () => {
     ...form.value,
   };
 
-  mutateVocabulary(() => {
+  editVocabulary(() => {
     router.push('/vocabulary-list');
   }, newVocabulary);
 };
