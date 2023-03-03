@@ -8,7 +8,7 @@
             text-color="white"
             label=""
             icon="arrow_back"
-            @click="onSubmit"
+            @click="goBack"
           >
           </my-button>
         </div>
