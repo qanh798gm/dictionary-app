@@ -1,7 +1,7 @@
 <template>
   <q-layout view="lHh Lpr fff">
     <q-page-container>
-      <q-page class="window-height window-width row justify-between">
+      <q-page class="window-height window-width row justify-center">
         <div class="column q-pa-lg">
           <my-button
             color="primary"

@@ -4,6 +4,7 @@
       row-key="name"
       :columns="headers"
       :filter="filter"
+      :pagination="initialPagination"
       :rows="items"
       :title="title"
     >
@@ -49,7 +50,7 @@
 
 <script setup lang="ts">
 import { useQuasar } from 'quasar';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import MyButton from '../MyButton.vue';
 
 const emit = defineEmits(['editCallback', 'removeCallback']);
@@ -59,26 +60,24 @@ const props = defineProps<{
   title: string;
 }>();
 
-const { headers = [], items = [], title = '' } = props;
+const initialPagination = {
+  rowsPerPage: 10,
+};
+const { headers = [], title = '' } = props;
+const items = computed(() => props.items);
+
 const filter = ref('');
 
 const $q = useQuasar();
 const alert = (id: string) => {
   $q.dialog({
     title: 'Confirm',
-    message: 'Are you sure?',
+    message: 'Are you sure to remove this vocabulary?',
     cancel: true,
     persistent: true,
-  })
-    .onOk(() => {
-      onRemoveClick(id);
-    })
-    .onCancel(() => {
-      // console.log('Cancel')
-    })
-    .onDismiss(() => {
-      // console.log('I am triggered on both OK and Cancel')
-    });
+  }).onOk(() => {
+    onRemoveClick(id);
+  });
 };
 
 const onEditClick = (id: string) => {

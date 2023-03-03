@@ -10,7 +10,7 @@
             <q-card
               square
               class="shadow-24"
-              style="width: 400px; height: 540px"
+              style="width: 400px; height: 420px"
             >
               <q-card-section class="card-color">
                 <h4 class="text-h5 text-white q-my-md">{{ title }}</h4>

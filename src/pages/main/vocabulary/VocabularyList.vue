@@ -12,7 +12,7 @@
   </div>
   <my-smart-table
     :headers="headers"
-    :items="mutatedItems"
+    :items="vocabularyList"
     :title="'Vocabulary'"
     @edit-callback="editCallback"
     @remove-callback="removeCallback"
@@ -26,16 +26,12 @@ import MySmartTable from 'src/components/table/MySmartTable.vue';
 import { useRouter } from 'vue-router';
 import { vocabularyHeaders } from './data';
 import { useVocabularyStore } from 'src/stores/vocabulary';
-import { ref } from 'vue';
+import { computed } from 'vue';
 
 const vocabularyStore = useVocabularyStore();
 const headers = vocabularyHeaders;
-const { vocabularyList, removeVocabulary } = vocabularyStore;
-
-const mutatedItems = ref(vocabularyList);
-vocabularyStore.$subscribe((_, state) => {
-  mutatedItems.value = [...state.vocabularyList];
-});
+const { removeVocabulary } = vocabularyStore;
+const vocabularyList = computed(() => vocabularyStore.vocabularyList);
 
 const router = useRouter();
 const handleAdd = () => {
